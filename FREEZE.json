@@ -27,7 +27,7 @@
     "item_deadline.py": "8d3d637ab3db1be9769e26900b4fc46964e48425a05bb92402a2b504ae66ff3a",
     "launch.py": "d8f966264dfa5d977ef6444364e1eb4128cf34ed1b60bc94a45f2649f6fce2d3",
     "model_setup.py": "6c7cd992039327178b72247b8b0f44214a5a00e43abcc0f583130dfe91586dd7",
-    "pkg_check.py": "0e8bf9d4c723f6205e25244a28cae31f4534d8356e1cc1a1390dad199b2904c0",
+    "pkg_check.py": "29afd4403fecfe74aef63cb8c103719bf73da9a8ebfe70b634ce4c844bd9cb9d",
     "post_calibration.py": "62a89b2b87cee77322333774a6e081f28646804c926af0f0c0e798a2018b3ffe",
     "prepare_model.sh": "454a0090ce0187bf6f4b4825a537183cf095c503592a7f673f7f57329258dc44",
     "quota.py": "8b039bc30c13e6c5a63668f3064fbb311358f9295922a817ec26f09893936f8d",
@@ -39,7 +39,20 @@
     "serve.sh": "13008367a9b37988de9c7acfa1d2340ca7dea502fd352887fc61783749d279c3",
     "server.py": "dbce4f70c2c684ac8ea5069a9dfa1d30aa33a8e1c33d274d91fd3c2a953c6951"
   },
-  "replaced_documents": {},
+  "replaced_documents": {
+    "DISCLOSURE.md": {
+      "frozen_sha256": "a28bb28f7c7c713f0b66f59b89103ce01c6fd0d46096f3347db855dd45746dc4",
+      "prepared_sha256": "f50f14b50c9399ebf1cbf8867a8f807374448e0fbc9218dd3f3cd4a350a36135"
+    },
+    "MODEL_CARD.md": {
+      "frozen_sha256": "8ca78063e9198dae8e698e71498432743dd84cc5ddd7b77550b28f5bd47e4526",
+      "prepared_sha256": "311bf55c3eda8fb9e464c0870d662c87fc99ae8f9d1a38fa64e12b9cfed8b59f"
+    },
+    "README.md": {
+      "frozen_sha256": "9dfd776e1d57825c74ca7b8cbb1ce3c938500edb8a2a09020d1e1c33a63fbd13",
+      "prepared_sha256": "91995c8d1a63816e14ec73a3d2c9d25993072592c98ddbbd073ac211d1f445c5"
+    }
+  },
   "repo_id": "MeTask-Rain/metask-jev-rain-31B-trained",
   "revision": "9392335f5a17395ecd70049f85b1909d53500144",
   "schema": "metadecision_31b_freeze_v1",

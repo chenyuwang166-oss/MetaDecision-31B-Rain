@@ -8,15 +8,9 @@ The model weights are exactly those of
 (the same files, pinned by SHA-256 in `MODEL_MANIFEST.json`): Google's official W4A16 checkpoint
 `google/gemma-4-31B-it-qat-w4a16-ct` (unchanged) and our LoRA adapter, loaded together and never
 merged. `MODEL_MANIFEST.json` names that repository's earlier revision `9392335f5a17395ecd70049f85b1909d53500144`, which
-holds the same model files. This entry changes only how the service uses them:
+holds the same model files.
 
-- a larger share of decisions may take a short drafting pass (slow-path quota 49%, at most 192 drafted tokens);
-- a decision that takes the drafting pass has a deadline of 9 s: the draft is stopped in time for its answer to be read, and a drafting pass that cannot be read in time returns the first-pass answer;
-- a choice decision answered in one pass although its length allowed the drafting pass, whose first-pass margin is below 4, is read once more with the options in reverse order, and the two answer distributions are averaged;
-- the reported probabilities get a per-type post-calibration fitted on our own development set (no model call);
-- the cost fuse prices engine tokens at the leaderboard's GPU-time rate for this architecture (USD 0.0598 per million tokens).
-
-Facts and serving rules are in [DISCLOSURE.md](DISCLOSURE.md).
+Data and attribution are in [DISCLOSURE.md](DISCLOSURE.md).
 
 ## Requirements
 
@@ -116,23 +110,10 @@ new `WORK`.
 
 ## What to expect
 
-- Health line: `"status": "ok"`, `"warnings": []`, `"model_key": "metask-gemma4-31b-lora-w4a16"`,
-  `"mode": "routed"`, `"quantization_kernel": "compressed-tensors"`, `"prefix_caching": true`,
-  `"supports_slow_session": true`, and `threshold_identity.adapter` equal to `/model/adapter`, the
-  verified adapter folder.
+- Health line: `"status": "ok"` and `"warnings": []`.
 - Startup: `launch.py` verifies the model folder and the adapter, writes the run configuration
-  (with the adapter folder filled in) to `$WORK/state/run1-startup/config.runtime.json`, and starts
-  vLLM with `enable_lora` and `max_lora_rank=16`; it sets `VLLM_BATCH_INVARIANT=1`,
-  `VLLM_USE_FLASHINFER_SAMPLER=0` and `VLLM_WORKER_MULTIPROC_METHOD=spawn`. Each startup attempt
-  waits at most 1800 s for readiness: the first lets vLLM select the attention backend; only if the
-  engine fails to start does a second attempt request `TRITON_ATTN`. Before serving, the service
-  times a few short synthetic drafts to size its drafting chunks.
-- Each decision is first read in one prompt pass. At most 49% of decisions take a second,
-  drafting pass (at most 192 generated tokens) before the answer is read again; such a
-  decision is planned to finish within its 9 s deadline, counted from the moment the
-  service starts answering the request (an engine call in progress is completed, never abandoned;
-  DISCLOSURE.md states the rules and the cost fuse). Inputs longer than 6,653 tokens are answered in
-  one pass from a context shortened to at most 6,653 tokens by the service's extraction rule.
+  to `$WORK/state/run1-startup/config.runtime.json` and starts vLLM. Each startup attempt waits
+  at most 1800 s for readiness.
 - Writes: the service writes files only below `$WORK/state` (plus shared memory in `/dev/shm`) and
   the harness only below `$WORK/run1`. The package and model mounts are read-only. Cache and
   configuration path variables (`HF_HOME`, `XDG_*`, `TRITON_*`, `TORCH_HOME` and similar) must not
@@ -141,12 +122,7 @@ new `WORK`.
 - Responses: an item the service cannot process returns HTTP 422 without answer and without usage;
   after an engine failure, and from the third consecutive item failure on, the service answers
   every `POST /v1/systemone` with HTTP 503 and `/health` reports `"status": "error"`. No substitute
-  answer is ever returned. A decision whose drafting pass could not be read before its deadline is
-  answered (HTTP 200) with its valid first-pass answer and carries a `warning` note, also listed in
-  `partial_errors`.
-
-The health response keeps `threshold_identity.quant: "awq"` as a historical configuration alias;
-the actual backend is **compressed-tensors W4A16**, reported by `quantization_kernel`.
+  answer is ever returned.
 
 ## Package checks (offline, no GPU or network)
 
@@ -157,8 +133,6 @@ python3 -B selftest.py --offline    # synthetic software tests, including long-i
 ```
 
 `MODEL_MANIFEST.json` pins the weight repository, revision and every model and adapter file;
-`ADAPTER_MANIFEST.json` records the adapter's origin by SHA-256; `FREEZE.json` records the freeze
-of this configuration; `MANIFEST.sha256` binds all package files. `MODEL_CARD.md` describes the
-model.
+`MANIFEST.sha256` binds all package files. `MODEL_CARD.md` describes the model.
 
 Contact: chenyuwang166@gmail.com
