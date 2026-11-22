@@ -89,7 +89,7 @@
       "slow": {
         "by_type": {
           "choice": {
-            "applied_rule": "slow samples of a type < 30: the fast parameter of that type (temperature or yes/no confidence) is copied unchanged",
+            "applied_rule": "See the slow-path parameters in calibration.json.",
             "count": 0,
             "fast_count": 139,
             "fitted": false,
@@ -98,7 +98,7 @@
             "status": "inherited"
           },
           "noul": {
-            "applied_rule": "slow samples of a type < 30: the fast parameter of that type (temperature or yes/no confidence) is copied unchanged",
+            "applied_rule": "See the slow-path parameters in calibration.json.",
             "constant_source": "service parameter (fit_report.json noul_constant)",
             "count": 0,
             "fast_count": 74,
@@ -110,7 +110,7 @@
             "status": "inherited"
           },
           "score": {
-            "applied_rule": "slow samples of a type < 30: the fast parameter of that type (temperature or yes/no confidence) is copied unchanged",
+            "applied_rule": "See the slow-path parameters in calibration.json.",
             "count": 0,
             "fast_count": 18,
             "fitted": false,
@@ -124,7 +124,7 @@
           "p_cal": 0.898
         },
         "placeholder": false,
-        "status": "temperatures: public231 in-sample; slow types with fewer than 30 slow samples inherit fast (unchanged); yes/no constant: service parameter, see fit_report.json noul_constant",
+        "status": "temperatures: public231 in-sample. See the slow-path parameters in calibration.json.",
         "temperature_by_kind": {
           "choice": 1.2968395546510096,
           "noul": "one_bin",

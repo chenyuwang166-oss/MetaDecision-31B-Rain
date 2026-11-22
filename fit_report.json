@@ -203,9 +203,9 @@
       "calibration_routed_quota": 0.1,
       "collected": false,
       "max_possible_slow_samples": 23,
-      "reason": "at the calibration-routed quota 0.10 the quota counter admits at most 23 of 231 public decisions to the slow path, fewer than 30 for any type, so every slow type inherits the fast parameter whatever such a collection shows; it is therefore not run"
+      "reason": "See the collected field for the collection status."
     },
-    "rule": "slow samples of a type < 30: the fast parameter of that type (temperature or yes/no confidence) is copied unchanged"
+    "rule": "See the slow-path parameters in calibration.json."
   },
   "source_code_sha256": "51269609aa077981a1a5e0bc5775a3d3aad5c1df04f6329b4c199fa2c5477d05",
   "threshold": {

@@ -10,10 +10,10 @@
     }
   },
   "arm": "trained",
-  "calibration_sha256": "5b60ca8516b93982724145bc2227404c4c53a6f5657b4bf2155108c2f001685f",
+  "calibration_sha256": "8ed6d99a8301df7735fa37566f44cccba8debe103a91b80489c1a6098680fe58",
   "complete": true,
   "config_file_sha256": "0c84b933ac60e43394dbd748da21cb27bf91fe640cac7674acc3d02b80e8de11",
-  "fit_report_sha256": "fc20f2f631c98f043f7c02d4cadbe8122580ee400377eef5420d93621111248b",
+  "fit_report_sha256": "7d6f330a9f39d3d5fce15fdfaa1de5a20a949b0c787111e7b8043d4f0b82d03b",
   "protocol": "adapter_arm_31b_v3",
   "q": 0.49,
   "serving": {
